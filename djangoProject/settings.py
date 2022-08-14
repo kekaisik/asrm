@@ -257,7 +257,7 @@ DATABASES = {
         'NAME': 'asrm',
         'USER': 'postgres',
         'PASSWORD': 'kszda2019',
-        'HOST': 'acpm.cdsghun3z6au.eu-west-2.rds.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
