@@ -271,9 +271,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'acpm',
         'USER': 'postgres',
-        'PASSWORD': '504142',
+        'PASSWORD': 'kszda2019',
         'HOST': 'localhost',
-        'PORT': '6000',
+        'PORT': '5432',
     }
 }
 
