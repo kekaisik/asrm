@@ -25,7 +25,7 @@ class User(AbstractUser):
     expiration_date = models.DateField("Подписка действительна до", blank=True, default=timezone.now())
     profession = models.CharField("Профессия", max_length=100)
     date_of_Birth = models.DateField("Дата Рождения", default=timezone.now)
-    phone = models.CharField("Номер Телефона", max_length=50, unique=True)
+    phone = models.CharField("Номер Телефона", max_length=50)
     address = models.CharField("Адрес", max_length=100)
     city = models.CharField("Город", max_length=100)
     country = models.CharField("Страна", max_length=100)
@@ -147,18 +147,18 @@ class Society(BasePost):
         verbose_name_plural = "Общество"
 
 
-class Education(BasePost):
+class Conference(BasePost):
     @property
     def get_group(self):
-        return 'education'
+        return 'conference'
 
     @property
     def get_url(self):
-        return f'education/{self.category}'
+        return f'conference/{self.category}'
 
     class Meta:
-        verbose_name = "Образование"
-        verbose_name_plural = "Образование"
+        verbose_name = "Конференция"
+        verbose_name_plural = "Конференция"
 
 
 class Protocols(BasePost):
@@ -176,6 +176,8 @@ class Protocols(BasePost):
 
 
 class Event(BasePost):
+    categories = [('upcoming', 'Предстоящие мероприятия'), ('archive', 'Архив')]
+    category = models.CharField('Категория', choices=categories, max_length=15)
     en_announcement = models.CharField("Аннонс на английском", max_length=100, default='')
     ru_announcement = models.CharField("Аннонс на русском", max_length=100, default='')
     kz_announcement = models.CharField("Аннонс на казахском", max_length=100, default='')
@@ -223,7 +225,7 @@ class Event(BasePost):
         return f'events/{self.category}'
 
     class Meta:
-        verbose_name = "Мероприятия"
+        verbose_name = "Меропрития"
         verbose_name_plural = "Мероприятия"
 
 
@@ -314,7 +316,7 @@ class Society_Images(Base_Images):
 
 
 class Education_Images(Base_Images):
-    education = models.ForeignKey(Education, on_delete=models.CASCADE, related_name="images")
+    education = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name="images")
 
 
 class Protocols_Images(Base_Images):
@@ -340,7 +342,7 @@ class PDF_Society(Base_Pdf):
 
 
 class PDF_Education(Base_Pdf):
-    education = models.ForeignKey(Education, on_delete=models.CASCADE, related_name="pdfs")
+    education = models.ForeignKey(Conference, on_delete=models.CASCADE, related_name="pdfs")
 
 
 class PDF_Protocols(Base_Pdf):

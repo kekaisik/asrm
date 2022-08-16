@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from djoser.serializers import UserCreateSerializer
+from djoser.serializers import UserCreateSerializer, UserSerializer, User
 from .models import (Society, Society_Images, PDF_Society,
                      User, Event, Index, News
-                    )
+                     )
 
 
 class UserRegistrationSerializer(UserCreateSerializer):
@@ -13,6 +13,7 @@ class UserRegistrationSerializer(UserCreateSerializer):
         fields = ('username', 'email', 'password', 'first_name', 'last_name', 'fatherland', 'profession',
                   'date_of_Birth', 'phone', 'address', 'city', 'country',
                   'place_of_work', 'job',)
+
 
 #
 

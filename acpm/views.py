@@ -1,9 +1,9 @@
 from itertools import chain
-
+import requests
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
-from .models import Society, News, Education, Protocols, Event, Index
+from .models import Society, News, Conference, Protocols, Event, Index
 from .serializers import (SocietyListSerializerRU, SocietyListSerializerEN, SocietyListSerializerKZ,
                           EventListSerializerEN, EventListSerializerRU, EventListSerializerKZ,
                           SearchListSerializerKZ, SearchListSerializerEN, SearchListSerializerRU,
@@ -12,6 +12,15 @@ from .serializers import (SocietyListSerializerRU, SocietyListSerializerEN, Soci
                           EventCategoriesSerializerEN, EventCategoriesSerializerKZ, EventCategoriesSerializerRU,
                           NewsListSerializer)
 from django.db.models import Q
+
+
+class UserActivationView(APIView):
+    def get(self, request, uid, token):
+        post_url = 'https://asrm.kz/users/activate'
+        post_data = {'uid': uid, 'token': token}
+        result = requests.post(post_url, data=post_data)
+        content = result.text
+        return Response(content)
 
 
 class CustomDetail(APIView):
@@ -65,8 +74,8 @@ class SocietyDetailView(CustomDetail):
     state_model = Society
 
 
-class EducationDetailView(CustomDetail):
-    state_model = Education
+class ConferenceDetailView(CustomDetail):
+    state_model = Conference
 
 
 class NewsDetailView(CustomDetail):
@@ -90,8 +99,8 @@ class SocietyNavigationView(CustomNavigation):
     state_model = Society
 
 
-class EducationNavigationView(CustomNavigation):
-    state_model = Education
+class ConferenceNavigationView(CustomNavigation):
+    state_model = Conference
 
 
 class ProtocolsNavigationView(CustomNavigation):
@@ -120,8 +129,8 @@ class SocietyCategoriesView(CustomCategoriesView):
     state_model = Society
 
 
-class EducationCategoriesView(CustomCategoriesView):
-    state_model = Education
+class ConferenceCategoriesView(CustomCategoriesView):
+    state_model = Conference
 
 
 class ProtocolsCategoriesView(CustomCategoriesView):
@@ -184,21 +193,21 @@ class SearchDetailView(APIView):
         kz_search = Q(kz_title__icontains=search) | Q(kz_text__icontains=search)
         if language == 'ru':
             serializers = SearchListSerializerRU
-            education = Education.objects.filter(ru_search)
+            education = Conference.objects.filter(ru_search)
             news = News.objects.filter(Q(title__icontains=search) | Q(text__icontains=search))
             society = Society.objects.filter(ru_search)
             protocols = Protocols.objects.filter(ru_search)
             event = Event.objects.filter(ru_search)
         elif language == 'kz':
             serializers = SearchListSerializerKZ
-            education = Education.objects.filter(kz_search)
+            education = Conference.objects.filter(kz_search)
             news = News.objects.filter(Q(title__icontains=search) | Q(text__icontains=search))
             society = Society.objects.filter(kz_search)
             protocols = Protocols.objects.filter(kz_search)
             event = Event.objects.filter(kz_search)
         else:
             serializers = SearchListSerializerEN
-            education = Education.objects.filter(en_search)
+            education = Conference.objects.filter(en_search)
             news = News.objects.filter(Q(title__icontains=search) | Q(text__icontains=search))
             society = Society.objects.filter(en_search)
             protocols = Protocols.objects.filter(en_search)

@@ -10,7 +10,7 @@ urlpatterns = [
     # path("event/<str:pk>", views.EventDetailView.as_view()),
     # path("protocols/<str:pk>", views.ProtocolsDetailView.as_view()),
 
-    path("<str:language>/education/<str:category>", views.EducationNavigationView.as_view()),
+    path("<str:language>/conference/<str:category>", views.ConferenceNavigationView.as_view()),
     path("<str:language>/society/<str:category>", views.SocietyNavigationView.as_view()),
     path("<str:language>/protocols/<str:category>", views.ProtocolsNavigationView.as_view()),
     path("<str:language>/events/<str:category>", views.EventNavigationView.as_view()),
@@ -20,7 +20,7 @@ urlpatterns = [
     path("<str:language>/index/<str:category>", views.IndexNavigationView.as_view()),
 
     path("<str:language>/society/", views.SocietyCategoriesView.as_view()),
-    path("<str:language>/education/", views.EducationCategoriesView.as_view()),
+    path("<str:language>/conference/", views.ConferenceCategoriesView.as_view()),
     path("<str:language>/protocols/", views.ProtocolsCategoriesView.as_view()),
     path("<str:language>/events/", views.EventCategoriesView.as_view()),
 

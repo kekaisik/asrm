@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
 
     'acpm',
+    'start',
 
 ]
 
@@ -171,6 +172,10 @@ REST_FRAMEWORK = {
 }
 
 
+SITE_NAME = 'https//asrm.kz/'
+
+DOMAIN = 'asrm.kz'
+
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'acpm.serializers.UserRegistrationSerializer',
@@ -178,8 +183,18 @@ DJOSER = {
         'current_user': 'acpm.serializers.UserRegistrationSerializer',
     },
     'HIDE_USERS': True,
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_ACTIVATION_EMAIL': True,
+
 }
 
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'kakaisik0606@gmail.com'
+EMAIL_HOST_PASSWORD = 'rdmwkjiiqbpunttl'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 # CKEDITOR_CONFIGS = {
 #     'default': {
@@ -254,11 +269,11 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'asrm',
+        'NAME': 'acpm',
         'USER': 'postgres',
-        'PASSWORD': 'kszda2019',
+        'PASSWORD': '504142',
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '6000',
     }
 }
 

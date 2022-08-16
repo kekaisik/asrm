@@ -32,3 +32,4 @@ urlpatterns = [
 
 urlpatterns += doc_urls
 
+# urlpatterns += [re_path(r'^.*', include("start.urls"))]

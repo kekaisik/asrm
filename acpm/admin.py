@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django import forms
-from .models import (Society, Event, News, Education, Protocols, Index,
+from .models import (Society, Event, News, Conference, Protocols, Index,
                      Society_Images, Event_Images, News_Images, Education_Images, Protocols_Images,
                      PDF_Society, PDF_Event, PDF_News, PDF_Education, PDF_Protocols,
                      User
@@ -113,7 +113,7 @@ class EventAdmin(BaseAdmin):
     inlines = [EventInLine,EventPDF]
 
 
-@admin.register(Education)
+@admin.register(Conference)
 class EventAdmin(BaseAdmin):
     inlines = [EducationInLine, EducationPDF]
 
