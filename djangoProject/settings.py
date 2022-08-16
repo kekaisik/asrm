@@ -268,7 +268,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'acpm',
+        'NAME': 'asrm',
         'USER': 'postgres',
         'PASSWORD': 'kszda2019',
         'HOST': 'localhost',
