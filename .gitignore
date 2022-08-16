@@ -27,7 +27,7 @@ wheels/
 media/
 staticfiles/
 static/
-acpm/migrations/
+
 # Django stuff:
 *.log
 local_settings.py
