@@ -1,21 +1,48 @@
+import djoser.serializers
 from rest_framework import serializers
-from djoser.serializers import UserCreateSerializer, UserSerializer, User
+from djoser.serializers import UserCreateSerializer, UserSerializer
 from .models import (Society, Society_Images, PDF_Society,
-                     User, Event, Index, News
+                     User, Event, Index, News, URLS_Index,
                      )
 
 
 class UserRegistrationSerializer(UserCreateSerializer):
     # password = serializers.CharField(style={"input_type": "password"}, write_only=True)
+    password2 = djoser.serializers.PasswordRetypeSerializer()
 
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('username', 'email', 'password', 'first_name', 'last_name', 'fatherland', 'profession',
+        fields = ('username', 'email', 'password', 'password2', 'first_name', 'last_name', 'fatherland', 'profession',
                   'date_of_Birth', 'phone', 'address', 'city', 'country',
                   'place_of_work', 'job',)
 
 
+class UserCurrentSerializer(UserSerializer):
+    class Meta(UserSerializer.Meta):
+        model = User
+        fields = ('email', 'first_name', 'last_name', 'fatherland', 'profession',
+                  'date_of_Birth', 'phone', 'address', 'city', 'country',
+                  'place_of_work', 'job',)
+
 #
+
+
+class URLSerializerKZ(serializers.ModelSerializer):
+    class Meta:
+        model = URLS_Index
+        fields = ('url', 'kz_text')
+
+
+class URLSerializerRU(serializers.ModelSerializer):
+    class Meta:
+        model = URLS_Index
+        fields = ('url', 'ru_text')
+
+
+class URLSerializerEN(serializers.ModelSerializer):
+    class Meta:
+        model = URLS_Index
+        fields = ('url', 'en_text')
 
 
 class ImagesSerializer(serializers.ModelSerializer):
@@ -90,7 +117,7 @@ class NewsListSerializer(serializers.ModelSerializer):
 class EventListSerializerKZ(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
-    group = serializers.CharField(source='get_group')
+    group = serializers.CharField(source='get_url')
     date = serializers.CharField(source='parse_date_kz', max_length=50)
     end_date = serializers.CharField(source='parse_end_date_kz', max_length=15)
     title = serializers.CharField(source='get_title_kz')
@@ -107,7 +134,7 @@ class EventListSerializerKZ(serializers.ModelSerializer):
 class EventListSerializerRU(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
-    group = serializers.CharField(source='get_group')
+    group = serializers.CharField(source='get_url')
     date = serializers.CharField(source='parse_date_ru', max_length=50)
     end_date = serializers.CharField(source='parse_end_date_ru', max_length=15)
     title = serializers.CharField(source='get_title_ru')
@@ -124,7 +151,7 @@ class EventListSerializerRU(serializers.ModelSerializer):
 class EventListSerializerEN(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
-    group = serializers.CharField(source='get_group')
+    group = serializers.CharField(source='get_url')
     date = serializers.CharField(source='parse_date_en', max_length=50)
     end_date = serializers.CharField(source='parse_end_date_en', max_length=15)
     title = serializers.CharField(source='get_title_en')
@@ -168,28 +195,31 @@ class SearchListSerializerEN(serializers.ModelSerializer):
 class IndexSerializerRU(serializers.ModelSerializer):
     title = serializers.CharField(source='get_title_ru')
     text = serializers.CharField(source='get_text_ru')
+    urls = URLSerializerRU(many=True)
 
     class Meta:
         model = Index
-        fields = ('title', 'text',)
+        fields = ('title', 'text', 'urls')
 
 
 class IndexSerializerEN(serializers.ModelSerializer):
     title = serializers.CharField(source='get_title_en')
     text = serializers.CharField(source='get_text_en')
+    urls = URLSerializerEN(many=True)
 
     class Meta:
         model = Index
-        fields = ('title', 'text',)
+        fields = ('title', 'text', 'urls')
 
 
 class IndexSerializerKZ(serializers.ModelSerializer):
     title = serializers.CharField(source='get_title_kz')
     text = serializers.CharField(source='get_text_kz')
+    urls = URLSerializerKZ(many=True)
 
     class Meta:
         model = Index
-        fields = ('title', 'text',)
+        fields = ('title', 'text', 'urls')
 
 
 class CategoriesSerializerRU(serializers.ModelSerializer):

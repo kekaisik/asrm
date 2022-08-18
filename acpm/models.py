@@ -24,6 +24,7 @@ class User(AbstractUser):
     paid = models.BooleanField("Участник Общества", default=False,)
     expiration_date = models.DateField("Подписка действительна до", blank=True, default=timezone.now())
     profession = models.CharField("Профессия", max_length=100)
+    diploma = models.FileField("Диплом", upload_to=get_file_path, blank=True)
     date_of_Birth = models.DateField("Дата Рождения", default=timezone.now)
     phone = models.CharField("Номер Телефона", max_length=50)
     address = models.CharField("Адрес", max_length=100)
@@ -42,9 +43,9 @@ class BasePost(models.Model):
     kz_title = models.CharField("Название на  казахском", max_length=100)
     ru_text = RichTextField("Текст на русском", blank=True, extra_plugins=['iframe'],)
     en_text = RichTextField("Текст на английском", blank=True, extra_plugins=['iframe'],)
-    kz_text = RichTextField("Текст на казахском",blank=True, extra_plugins=['iframe'],)
+    kz_text = RichTextField("Текст на казахском", blank=True, extra_plugins=['iframe'],)
     paid = models.BooleanField("Платный", default=False)
-    main_image = models.ImageField("Основное фото", upload_to="post/img/", blank=True)
+    main_image = models.ImageField("Основное фото", upload_to=get_file_path, blank=True)
     category = models.CharField("Категория", max_length=50)
     date = models.DateTimeField("Дата Публикации", default=timezone.now)
     draft = models.BooleanField("Черновик", default=False)
@@ -222,7 +223,7 @@ class Event(BasePost):
 
     @property
     def get_url(self):
-        return f'events/{self.category}'
+        return f'{self.category}'
 
     class Meta:
         verbose_name = "Меропрития"
@@ -270,7 +271,7 @@ class News(models.Model):
 
 
 class Index(models.Model):
-    tags = [("about-us", "О нас"), ("membership", "Членство")]
+    tags = [("about-us", "О нас"), ("membership", "Членство"), ("lead-event", "Главное Мероприятие"),]
 
     ru_title = models.CharField("Название на русском", max_length=50)
     kz_title = models.CharField("Название на казахском", max_length=50)
@@ -278,6 +279,7 @@ class Index(models.Model):
     ru_text = RichTextField("Текст на русском",  extra_plugins=['iframe'], blank=True, default='')
     en_text = RichTextField("Текст на английском",  extra_plugins=['iframe'], blank=True, default='')
     kz_text = RichTextField("Текст на казахском",  extra_plugins=['iframe'], blank=True, default='')
+    main_image = models.ImageField("Фото", upload_to=get_file_path, blank=True)
     category = models.CharField(choices=tags, max_length=15)
 
     @property
@@ -355,3 +357,14 @@ class PDF_Event(Base_Pdf):
 
 class PDF_News(Base_Pdf):
     news = models.ForeignKey(News, on_delete=models.CASCADE, related_name="pdfs")
+
+
+#
+
+
+class URLS_Index(models.Model):
+    url = models.URLField("Ссылка",)
+    ru_text = models.CharField("Текст на русском", max_length=150)
+    en_text = models.CharField("Текст на английском", max_length=150)
+    kz_text = models.CharField("Текст на казахском", max_length=150)
+    index = models.ForeignKey(Index, on_delete=models.CASCADE, related_name='urls')

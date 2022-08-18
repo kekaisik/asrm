@@ -27,6 +27,8 @@ SECRET_KEY = 'django-insecure-k-@8h(1q-1&31oc%%m2lbcvyyfdk7bp9#db^vk58cf2ep4jng)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+DEVELOPER = True
+
 ALLOWED_HOSTS = ['*']
 
 
@@ -170,19 +172,20 @@ REST_FRAMEWORK = {
     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
 }
 
-
-SITE_NAME = 'https//asrm.kz/'
-
-DOMAIN = 'asrm.kz'
+#
+# SITE_NAME = 'https//asrm.kz/'
+#
+# DOMAIN = 'asrm.kz'
 
 DJOSER = {
     'SERIALIZERS': {
         'user_create': 'acpm.serializers.UserRegistrationSerializer',
-        'user': 'acpm.serializers.UserRegistrationSerializer',
-        'current_user': 'acpm.serializers.UserRegistrationSerializer',
+        'user': 'acpm.serializers.UserCurrentSerializer',
+        'current_user': 'acpm.serializers.UserCurrentSerializer',
     },
     'HIDE_USERS': True,
     'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'reset_password/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
 
 }
@@ -191,7 +194,7 @@ DJOSER = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'kakaisik0606@gmail.com'
-EMAIL_HOST_PASSWORD = 'rdmwkjiiqbpunttl'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
@@ -275,6 +278,19 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'acpm',
+#         'USER': 'postgres',
+#         'PASSWORD': '504142',
+#         'HOST': 'localhost',
+#         'PORT': '6000',
+#     }
+# }
 
 db_from_env = dj_database_url.config()
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))

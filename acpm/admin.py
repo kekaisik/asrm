@@ -4,8 +4,14 @@ from django import forms
 from .models import (Society, Event, News, Conference, Protocols, Index,
                      Society_Images, Event_Images, News_Images, Education_Images, Protocols_Images,
                      PDF_Society, PDF_Event, PDF_News, PDF_Education, PDF_Protocols,
+                     URLS_Index,
                      User
                      )
+
+
+class IndexUrl(admin.StackedInline):
+    model = URLS_Index
+    extra = 1
 
 
 class SocietyPDF(admin.StackedInline):
@@ -151,4 +157,5 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(Index)
 class IndexAdmin(admin.ModelAdmin):
     list_display = ("ru_title",)
+    inlines = [IndexUrl,]
 
