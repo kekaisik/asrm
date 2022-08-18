@@ -16,6 +16,7 @@ urlpatterns = [
     path("<str:language>/events/<str:category>", views.EventNavigationView.as_view()),
 
     path("<str:language>/news/", views.NewsListView.as_view()),
+    # path("<str:language>/events/<str:category>/<int:pk>")
 
     path("<str:language>/index/<str:category>", views.IndexNavigationView.as_view()),
 

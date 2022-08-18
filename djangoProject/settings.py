@@ -29,9 +29,9 @@ DEBUG = True
 
 DEVELOPER = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'asrm-admin.kz', '13.50.48.201']
 
-
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Application definition
 
 INSTALLED_APPS = [
@@ -173,9 +173,9 @@ REST_FRAMEWORK = {
 }
 
 #
-# SITE_NAME = 'https//asrm.kz/'
-#
-# DOMAIN = 'asrm.kz'
+SITE_NAME = 'asrm.kz'
+
+DOMAIN = 'https://asrm.kz'
 
 DJOSER = {
     'SERIALIZERS': {
@@ -184,7 +184,7 @@ DJOSER = {
         'current_user': 'acpm.serializers.UserCurrentSerializer',
     },
     'HIDE_USERS': True,
-    'ACTIVATION_URL': 'auth/users/activation/{uid}/{token}',
+    'ACTIVATION_URL': 'activation/{uid}/{token}',
     'PASSWORD_RESET_CONFIRM_URL': 'reset_password/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
 
@@ -194,7 +194,7 @@ DJOSER = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'kakaisik0606@gmail.com'
-EMAIL_HOST_PASSWORD = 'nhceeykzhcdombpg'
+EMAIL_HOST_PASSWORD = 'efxhsyedvccyirkk'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
@@ -280,7 +280,7 @@ DATABASES = {
 }
 
 
-
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',

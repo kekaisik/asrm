@@ -1,12 +1,32 @@
 from django.contrib import admin
+from django.core.mail import send_mail, BadHeaderError
 from django.utils.safestring import mark_safe
 from django import forms
 from .models import (Society, Event, News, Conference, Protocols, Index,
                      Society_Images, Event_Images, News_Images, Education_Images, Protocols_Images,
                      PDF_Society, PDF_Event, PDF_News, PDF_Education, PDF_Protocols,
                      URLS_Index,
-                     User
+                     User, Feedback,
                      )
+
+
+class EmailReply(admin.ModelAdmin):
+    def save_model(self, request, obj, form, change):
+        if not obj.email_reply:
+            return
+        if not obj.email_reply_text:
+            return
+        recipients = User.objects.values('email')
+        recipients = [{'email': 'kakaisik0606@gmail.com'}]
+        for mail in recipients:
+            try:
+                send_mail(obj.email_reply_capt, obj.email_reply_text, 'kakaisik@gmail.com', [mail['email']], html_message=obj.email_reply_text2)
+            except BadHeaderError:
+                pass
+        super().save_model(request, obj, form, change)
+
+
+admin.site.register(Feedback, EmailReply)
 
 
 class IndexUrl(admin.StackedInline):

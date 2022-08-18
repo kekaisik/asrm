@@ -124,7 +124,7 @@ class EventListSerializerKZ(serializers.ModelSerializer):
     pdfs = PDFSerializer(many=True)
     group = serializers.CharField(source='get_group')
     date = serializers.CharField(source='parse_date_kz', max_length=50)
-    type = serializers.CharField(source='get_url')
+    type = serializers.CharField(source='category')
     end_date = serializers.CharField(source='parse_end_date_kz', max_length=15)
     title = serializers.CharField(source='get_title_kz')
     text = serializers.CharField(source='get_text_kz')
@@ -141,7 +141,8 @@ class EventListSerializerRU(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
     group = serializers.CharField(source='get_group')
-    type = serializers.CharField(source='get_url')
+    type = serializers.CharField(source='category')
+    url = serializers.CharField(source='get_url')
     date = serializers.CharField(source='parse_date_ru', max_length=50)
     end_date = serializers.CharField(source='parse_end_date_ru', max_length=15)
     title = serializers.CharField(source='get_title_ru')
@@ -151,7 +152,7 @@ class EventListSerializerRU(serializers.ModelSerializer):
     class Meta:
         model = Event
         depth = 1
-        fields = ('id', 'title', 'text', 'main_image', 'paid', 'date',
+        fields = ('id', 'title', 'text', 'main_image', 'paid', 'date', 'url',
                   'end_date', 'images', 'pdfs', 'group', 'type', 'end_date', 'announcement')
 
 

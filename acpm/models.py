@@ -13,6 +13,16 @@ def get_file_path(instance, filename):
     return os.path.join('uploads/img', filename)
 
 
+class Feedback(models.Model):
+    email_reply = models.BooleanField('Отправить email')
+    email_reply_capt = models.CharField('Заговолок ответа на email', blank=True, max_length=500)
+    email_reply_text = RichTextField(extra_plugins=['iframe'],null=True)
+
+    class Meta:
+        verbose_name = "Отправить email"
+        verbose_name_plural = "Отправить email"
+
+
 class User(AbstractUser):
     first_name = models.CharField("Имя", max_length=100)
     last_name = models.CharField("Фамилия", max_length=100)
@@ -223,7 +233,7 @@ class Event(BasePost):
 
     @property
     def get_url(self):
-        return f'{self.category}'
+        return f'events/{self.category}/{self.id}'
 
     class Meta:
         verbose_name = "Меропрития"
