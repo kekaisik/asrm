@@ -268,29 +268,29 @@ AUTH_USER_MODEL = 'acpm.User'
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'asrm',
-#         'USER': 'postgres',
-#         'PASSWORD': 'kszda2019',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'acpm',
+        'NAME': 'asrm',
         'USER': 'postgres',
-        'PASSWORD': '504142',
+        'PASSWORD': 'kszda2019',
         'HOST': 'localhost',
-        'PORT': '6000',
+        'PORT': '5432',
     }
 }
+
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'acpm',
+#         'USER': 'postgres',
+#         'PASSWORD': '504142',
+#         'HOST': 'localhost',
+#         'PORT': '6000',
+#     }
+# }
 
 db_from_env = dj_database_url.config()
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
