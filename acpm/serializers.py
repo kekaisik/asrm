@@ -122,8 +122,9 @@ class NewsListSerializer(serializers.ModelSerializer):
 class EventListSerializerKZ(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
-    group = serializers.CharField(source='get_url')
+    group = serializers.CharField(source='get_group')
     date = serializers.CharField(source='parse_date_kz', max_length=50)
+    type = serializers.CharField(source='get_url')
     end_date = serializers.CharField(source='parse_end_date_kz', max_length=15)
     title = serializers.CharField(source='get_title_kz')
     text = serializers.CharField(source='get_text_kz')
@@ -133,13 +134,14 @@ class EventListSerializerKZ(serializers.ModelSerializer):
         model = Event
         depth = 1
         fields = ('id', 'title', 'text', 'main_image', 'paid', 'date',
-                  'end_date', 'images', 'pdfs', 'group', 'end_date', 'announcement')
+                  'end_date', 'images', 'pdfs', 'group', 'type', 'end_date', 'announcement')
 
 
 class EventListSerializerRU(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
-    group = serializers.CharField(source='get_url')
+    group = serializers.CharField(source='get_group')
+    type = serializers.CharField(source='get_url')
     date = serializers.CharField(source='parse_date_ru', max_length=50)
     end_date = serializers.CharField(source='parse_end_date_ru', max_length=15)
     title = serializers.CharField(source='get_title_ru')
@@ -150,13 +152,14 @@ class EventListSerializerRU(serializers.ModelSerializer):
         model = Event
         depth = 1
         fields = ('id', 'title', 'text', 'main_image', 'paid', 'date',
-                  'end_date', 'images', 'pdfs', 'group', 'end_date', 'announcement')
+                  'end_date', 'images', 'pdfs', 'group', 'type', 'end_date', 'announcement')
 
 
 class EventListSerializerEN(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
-    group = serializers.CharField(source='get_url')
+    group = serializers.CharField(source='get_group')
+    type = serializers.CharField(source='get_url')
     date = serializers.CharField(source='parse_date_en', max_length=50)
     end_date = serializers.CharField(source='parse_end_date_en', max_length=15)
     title = serializers.CharField(source='get_title_en')
@@ -167,7 +170,7 @@ class EventListSerializerEN(serializers.ModelSerializer):
         model = Event
         depth = 1
         fields = ('id', 'title', 'text', 'main_image', 'paid', 'date',
-                  'end_date', 'images', 'pdfs', 'group', 'end_date', 'announcement')
+                  'end_date', 'images', 'pdfs', 'group', 'type', 'end_date', 'announcement')
 
 
 class SearchListSerializerRU(serializers.ModelSerializer):
