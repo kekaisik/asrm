@@ -368,3 +368,15 @@ class URLS_Index(models.Model):
     en_text = models.CharField("Текст на английском", max_length=150)
     kz_text = models.CharField("Текст на казахском", max_length=150)
     index = models.ForeignKey(Index, on_delete=models.CASCADE, related_name='urls')
+
+    @property
+    def get_ru_text(self):
+        return self.ru_text
+
+    @property
+    def get_en_text(self):
+        return self.en_text
+
+    @property
+    def get_kz_text(self):
+        return self.kz_text

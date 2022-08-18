@@ -8,12 +8,11 @@ from .models import (Society, Society_Images, PDF_Society,
 
 class UserRegistrationSerializer(UserCreateSerializer):
     # password = serializers.CharField(style={"input_type": "password"}, write_only=True)
-    password2 = djoser.serializers.PasswordRetypeSerializer()
 
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('username', 'email', 'password', 'password2', 'first_name', 'last_name', 'fatherland', 'profession',
-                  'date_of_Birth', 'phone', 'address', 'city', 'country',
+        fields = ('username', 'email', 'password', 'first_name', 'last_name', 'fatherland', 'profession',
+                  'diploma', 'date_of_Birth', 'phone', 'address', 'city', 'country',
                   'place_of_work', 'job',)
 
 
@@ -21,28 +20,34 @@ class UserCurrentSerializer(UserSerializer):
     class Meta(UserSerializer.Meta):
         model = User
         fields = ('email', 'first_name', 'last_name', 'fatherland', 'profession',
-                  'date_of_Birth', 'phone', 'address', 'city', 'country',
+                  'diploma', 'date_of_Birth', 'phone', 'address', 'city', 'country',
                   'place_of_work', 'job',)
 
 #
 
 
 class URLSerializerKZ(serializers.ModelSerializer):
+    text = serializers.CharField(source='get_ru_text')
+
     class Meta:
         model = URLS_Index
-        fields = ('url', 'kz_text')
+        fields = ('url', 'text')
 
 
 class URLSerializerRU(serializers.ModelSerializer):
+    text = serializers.CharField(source='get_kz_text')
+
     class Meta:
         model = URLS_Index
-        fields = ('url', 'ru_text')
+        fields = ('url', 'text')
 
 
 class URLSerializerEN(serializers.ModelSerializer):
+    text = serializers.CharField(source='get_en_text')
+
     class Meta:
         model = URLS_Index
-        fields = ('url', 'en_text')
+        fields = ('url', 'text')
 
 
 class ImagesSerializer(serializers.ModelSerializer):
