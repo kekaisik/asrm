@@ -33,15 +33,15 @@ class User(AbstractUser):
     fatherland = models.CharField("Отчество", max_length=100, blank=True)
     paid = models.BooleanField("Участник Общества", default=False,)
     expiration_date = models.DateField("Подписка действительна до", blank=True, default=timezone.now())
-    profession = models.CharField("Профессия", max_length=100)
+    profession = models.CharField("Профессия", max_length=100, blank=True)
     diploma = models.FileField("Диплом", upload_to=get_file_path, blank=True)
-    date_of_Birth = models.DateField("Дата Рождения", default=timezone.now)
-    phone = models.CharField("Номер Телефона", max_length=50)
-    address = models.CharField("Адрес", max_length=100)
-    city = models.CharField("Город", max_length=100)
-    country = models.CharField("Страна", max_length=100)
-    place_of_work = models.CharField("Место Работы", max_length=100)
-    job = models.CharField("Должность", max_length=100)
+    date_of_Birth = models.DateField("Дата Рождения", default=timezone.now, blank=True)
+    phone = models.CharField("Номер Телефона", max_length=50, blank=True)
+    address = models.CharField("Адрес", max_length=100, blank=True)
+    city = models.CharField("Город", max_length=100, blank=True)
+    country = models.CharField("Страна", max_length=100, blank=True)
+    place_of_work = models.CharField("Место Работы", max_length=100, blank=True)
+    job = models.CharField("Должность", max_length=100, blank=True)
 
     # #REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'profession', 'date_of_Birth', 'phone', 'address',
     #                    'city', 'country', 'place_of_work', 'job']

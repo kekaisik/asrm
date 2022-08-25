@@ -83,9 +83,19 @@ class NewsDetailView(CustomDetail):
     state_serializer = NewsListSerializer
 
 
-# class EventDetailView(CustomDetail):
-#     state_model = Event
-#     state_serializer = EventListSerializer
+class EventDetailView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, language, category, pk):
+        post = Event.objects.filter(id=pk, draft=False)
+        if language == 'ru':
+            serializer = EventListSerializerRU(post, many=True)
+        elif language == 'en':
+            serializer = EventListSerializerEN(post, many=True)
+        else:
+            serializer = EventListSerializerKZ(post, many=True)
+        serializer.data[0]['text'] = serializer.data[0]['text'].replace('\r\n', '')
+        return Response(serializer.data)
 
 
 class ProtocolsDetailView(CustomDetail):

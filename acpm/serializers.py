@@ -27,7 +27,7 @@ class UserCurrentSerializer(UserSerializer):
 
 
 class URLSerializerKZ(serializers.ModelSerializer):
-    text = serializers.CharField(source='get_ru_text')
+    text = serializers.CharField(source='get_kz_text')
 
     class Meta:
         model = URLS_Index
@@ -35,7 +35,7 @@ class URLSerializerKZ(serializers.ModelSerializer):
 
 
 class URLSerializerRU(serializers.ModelSerializer):
-    text = serializers.CharField(source='get_kz_text')
+    text = serializers.CharField(source='get_ru_text')
 
     class Meta:
         model = URLS_Index

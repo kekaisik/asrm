@@ -20,7 +20,7 @@ class EmailReply(admin.ModelAdmin):
         recipients = [{'email': 'kakaisik0606@gmail.com'}]
         for mail in recipients:
             try:
-                send_mail(obj.email_reply_capt, obj.email_reply_text, 'kakaisik@gmail.com', [mail['email']], html_message=obj.email_reply_text2)
+                send_mail(obj.email_reply_capt, obj.email_reply_text, 'kakaisik@gmail.com', [mail['email']], html_message=obj.email_reply_text)
             except BadHeaderError:
                 pass
         super().save_model(request, obj, form, change)
