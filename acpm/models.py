@@ -390,3 +390,6 @@ class URLS_Index(models.Model):
     @property
     def get_kz_text(self):
         return self.kz_text
+
+
+
