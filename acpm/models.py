@@ -187,7 +187,7 @@ class Protocols(BasePost):
 
 
 class Event(BasePost):
-    categories = [('upcoming', 'Предстоящие мероприятия'), ('archive', 'Архив')]
+    categories = [('upcoming', 'Предстоящие мероприятия'), ('archive', 'Архив'), ('educational', 'Образовательные программы для пациентов')]
     category = models.CharField('Категория', choices=categories, max_length=15)
     en_announcement = models.CharField("Аннонс на английском", max_length=100, default='')
     ru_announcement = models.CharField("Аннонс на русском", max_length=100, default='')
