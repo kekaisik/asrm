@@ -157,7 +157,7 @@ class EventCategoriesView(APIView):
             serializers = EventCategoriesSerializerKZ
         else:
             serializers = EventCategoriesSerializerEN
-        posts = Event.objects.order_by('id').distinct()
+        posts = Event.objects.order_by('id').filter(draft=False)
         serializer = serializers(posts, many=True)
         return Response(serializer.data)
 
