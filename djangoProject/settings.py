@@ -175,7 +175,7 @@ REST_FRAMEWORK = {
 #
 SITE_NAME = 'asrm.kz'
 
-DOMAIN = 'https://asrm.kz'
+DOMAIN = 'asrm.kz'
 
 DJOSER = {
     'SERIALIZERS': {
