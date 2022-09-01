@@ -13,7 +13,7 @@ class UserRegistrationSerializer(UserCreateSerializer):
         model = User
         fields = ('username', 'email', 'password', 'first_name', 'last_name', 'fatherland', 'profession',
                   'diploma', 'date_of_Birth', 'phone', 'address', 'city', 'country',
-                  'place_of_work', 'job',)
+                  'place_of_work', 'job', 'paid', )
 
 
 class UserCurrentSerializer(UserSerializer):
@@ -160,7 +160,7 @@ class EventListSerializerEN(serializers.ModelSerializer):
     images = ImagesSerializer(many=True)
     pdfs = PDFSerializer(many=True)
     group = serializers.CharField(source='get_group')
-    type = serializers.CharField(source='get_url')
+    type = serializers.CharField(source='category')
     date = serializers.CharField(source='parse_date_en', max_length=50)
     end_date = serializers.CharField(source='parse_end_date_en', max_length=15)
     title = serializers.CharField(source='get_title_en')
