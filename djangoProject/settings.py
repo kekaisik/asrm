@@ -185,6 +185,7 @@ DJOSER = {
     },
     'HIDE_USERS': True,
     'ACTIVATION_URL': 'activation/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'reset/{uid}/{token}',
     'PASSWORD_RESET_CONFIRM_URL': 'reset_password/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
 
@@ -194,7 +195,7 @@ DJOSER = {
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'kakaisik0606@gmail.com'
-EMAIL_HOST_PASSWORD = 'efxhsyedvccyirkk'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 
@@ -280,7 +281,7 @@ DATABASES = {
 }
 
 
-#
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
